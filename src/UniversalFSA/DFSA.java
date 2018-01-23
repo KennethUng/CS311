@@ -45,5 +45,9 @@ public class DFSA {
         }
     }
 
+    public void setTransitionFunction(int numOfStates, int numOfAlphabets) {
+
+    }
+
 
 }
