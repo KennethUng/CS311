@@ -12,8 +12,19 @@ public class DFSA {
     }
 
     public boolean checkAccept(String input) {
-        input.toCharArray();
-        return true;
+        boolean answer = false;
+        int initialState = 0;
+        int nextState = 0; //Representation of the current state you are in
+        for(int i = 0; i < input.length(); i ++) {
+            for(int j = 0; j < alphabet.length; j ++) {
+                if(input.charAt(i) == alphabet[j].charAt(0)) {
+                    nextState = transitionFunction[nextState][j];
+                    answer = FINAL[nextState];
+
+                }
+            }
+        }
+        return answer;
     }
 
     public void setStates(int numOfStates) {
