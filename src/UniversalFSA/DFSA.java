@@ -46,7 +46,24 @@ public class DFSA {
     }
 
     public void setTransitionFunction(int numOfStates, int numOfAlphabets) {
+        transitionFunction = new int[numOfStates][numOfAlphabets];
 
+    }
+
+    public void setTransition(int originState, int givenAlphabet, int nextState) {
+
+        transitionFunction[originState][givenAlphabet] = nextState;
+
+    }
+
+    public void printTransitionFunction() {
+        for(int i = 0; i < numOfStates; i++) {
+            for(int j = 0; j < alphabet.length; j++) {
+                System.out.println("Current State : " + i + "\nAlphabet Given: " + j + "\nNext State: " + transitionFunction[i][j]);
+
+            }
+
+        }
     }
 
 

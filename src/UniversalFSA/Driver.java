@@ -32,11 +32,33 @@ public class Driver {
             System.out.println();
             universalDFSA.setAlphabet(arrOfAlphabet);
             universalDFSA.printAlphabet();
+            System.out.println("Alphabet length: " + arrOfAlphabet.length);
+            universalDFSA.setTransitionFunction(numOfStates, arrOfAlphabet.length);
             while(sc.hasNext()) {
                 parser = sc.nextLine();
+                System.out.println(parser);
                 transitions = parser.split(" ");
-                if(transitions[0] == "(") {
+                for(int i = 0; i < transitions.length; i ++) {
+                    System.out.print(transitions[i]);
+                }
+                if(transitions[0].compareTo("(") == 0) {
+                    System.out.println("I'm here");
+                    int originState = Integer.parseInt(transitions[1]);
+                    System.out.println(originState);
+                    int givenAlphabet = Integer.parseInt(transitions[2]);
+                    String nextState = transitions[3];
+                    int nextS;
+                    if(nextState == " "){
+                        nextS = -1;
+                    }
+                    else {
+                        nextS = Integer.parseInt(transitions[3]);
+                    }
+                    System.out.println(givenAlphabet);
 
+                    universalDFSA.setTransition(originState,givenAlphabet,nextS);
+                }
+                else {
                 }
 
             }
