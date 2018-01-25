@@ -1,3 +1,14 @@
+/**
+ *
+ * Kenneth Ung
+ * 1/28/18
+ * CS311.02
+ * Project # 1: Universal Finite State Automata
+ *
+ *
+ *
+ *
+ */
 package UniversalFSA;
 
 import java.io.*;
@@ -22,6 +33,7 @@ public class Driver {
             /* The scanner (sc) is what we are going to be using to read the input.txt file that holds our DFSAs */
             Scanner sc = new Scanner(new File(fileName));
 
+            /* This while loop will iterate until we reach End of File */
             while (sc.hasNext()) {
                 System.out.println("Finite State Automaton #" + ++counter);
                 int numOfStates = sc.nextInt();
@@ -30,7 +42,8 @@ public class Driver {
                 sc.nextLine();
                 String parser = sc.nextLine();
                 System.out.println("(2) final states: " + parser);
-                String[] arrOfFinal = parser.split(",");
+                /* This is where we start creating separate arrays for each line of the file */
+                String[] arrOfFinal = parser.split(","); // For Final States, I separated them with comma
                 int[] finalStates = new int[arrOfFinal.length];
                 for (int i = 0; i < arrOfFinal.length; i++) { // This for loop is responsible for assigning the final states
                     finalStates[i] = Integer.parseInt(arrOfFinal[i]);
@@ -40,12 +53,13 @@ public class Driver {
                 }
                 parser = sc.nextLine();
                 System.out.println("(3) alphabets: " + parser);
-                String[] arrOfAlphabet = parser.split(" ");
+                String[] arrOfAlphabet = parser.split(" ");//Alphabets are lines that have a space inbetween them
                 universalDFSA.setAlphabet(arrOfAlphabet);
                 universalDFSA.setTransitionFunction(numOfStates, arrOfAlphabet.length);
                 System.out.println("(4) transitions: ");
                 parser = sc.nextLine();
-                while (parser.startsWith("(")) {
+                /* This while loop will keep going until we no longer have transition functions and is responsible for setting transition functions */
+                while (parser.startsWith("(")) { // Transitions start with ( character and are separated by spaces
                     transitions = parser.split(" ");
                     int originState = Integer.parseInt(transitions[1]);
                     String givenAlphabet = transitions[2];
@@ -61,6 +75,7 @@ public class Driver {
                     parser = sc.nextLine();
                 }
                 System.out.println("(5) Strings: ");
+                /* This while loop is where we start checking strings to see whether or not they are accepted by our DFSA */
                 while (!parser.startsWith("/") && sc.hasNext()) {
                     System.out.print("       " + parser);
                     boolean accepted = universalDFSA.checkAccept(parser);
